@@ -22,7 +22,7 @@ void Trivium::initalize(const std::bitset<80>& aKey, const std::bitset<80>& aIV)
 {
 
     mC = std::bitset<111>("111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-    
+
     for( int vI = 0; vI < aKey.size(); ++vI ){
         mB[vI] = aKey[vI];
     }
@@ -51,13 +51,13 @@ bool Trivium::step()
     mB[0] = vBin;
     mC <<= 1;
     mC[0] = vCin;
-    
+
     return vAout^vBout^vCout;
 };
 
 void Trivium::warmUp()
 {
-    for(int vI = 1; vI <= 1152; ++vI){
+    for(int vI = 1; vI <= 4*288; ++vI){
         step();
     }
 };
@@ -67,5 +67,5 @@ void Trivium::print(){
     std::cout << "B: " << mB << std::endl;
     std::cout << "C: " << mC << std::endl;
 }
-  
+
 }
