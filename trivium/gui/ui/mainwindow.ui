@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>410</height>
+    <width>885</width>
+    <height>465</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,6 +29,9 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="maxLength">
+          <number>20</number>
+         </property>
          <property name="placeholderText">
           <string>Hexadecimal</string>
          </property>
@@ -36,6 +39,12 @@
        </item>
        <item>
         <widget class="QLineEdit" name="lEKeyBin">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>80</number>
+         </property>
          <property name="placeholderText">
           <string>Binary</string>
          </property>
@@ -58,6 +67,9 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="maxLength">
+          <number>20</number>
+         </property>
          <property name="placeholderText">
           <string>Hexadecimal</string>
          </property>
@@ -65,6 +77,9 @@
        </item>
        <item>
         <widget class="QLineEdit" name="lEIVBin">
+         <property name="maxLength">
+          <number>80</number>
+         </property>
          <property name="placeholderText">
           <string>Binary</string>
          </property>

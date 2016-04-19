@@ -1,3 +1,6 @@
+#ifndef _mainwindow_
+#define _mainwindow_
+
 #include "ui_mainwindow.h"
 
 #include <QWidget>
@@ -20,3 +23,5 @@ public:
 };
 
 }
+
+#endif
