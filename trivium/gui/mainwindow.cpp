@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 
 #include <sstream>
+#include <iostream>
 
 namespace trivium{
 
 std::string bitstringToHexstring( const std::string& aBits );
+std::string hexstringToBitstring( const std::string& aHex );
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -23,6 +25,22 @@ MainWindow::MainWindow(QWidget *parent)
     vStream << mIV;
     lEIVBin->setText(QString::fromStdString(vStream.str()));
     lEIVHex->setText(QString::fromStdString(bitstringToHexstring(vStream.str())));
+
+    connect(lEIVBin, SIGNAL(textEdited(QString)), this, SLOT(updateHexText(QString)) );
+    connect(lEIVHex, SIGNAL(textEdited(QString)), this, SLOT(updateBinText(QString)) );
+    connect(lEKeyBin, SIGNAL(textEdited(QString)), this, SLOT(updateHexText(QString)) );
+    connect(lEKeyHex, SIGNAL(textEdited(QString)), this, SLOT(updateBinText(QString)) );
+};
+
+
+void MainWindow::updateHexText(const QString& aText){
+    lEKeyHex->setText(QString::fromStdString(bitstringToHexstring(lEKeyBin->text().toStdString())));
+    lEIVHex->setText(QString::fromStdString(bitstringToHexstring(lEIVBin->text().toStdString())));
+};
+
+void MainWindow::updateBinText(const QString& aText){
+    lEKeyBin->setText(QString::fromStdString(hexstringToBitstring(lEKeyHex->text().toStdString())));
+    lEIVBin->setText(QString::fromStdString(hexstringToBitstring(lEIVHex->text().toStdString())));
 };
 
 std::string bitstringToHexstring( const std::string& aBits ){
@@ -31,14 +49,17 @@ std::string bitstringToHexstring( const std::string& aBits ){
     std::stringstream vHexas;
     std::locale vLocale;
 
+    std::string vWurst(aBits);
+    std::reverse(vWurst.begin(), vWurst.end());
+
     unsigned char vHex = 0, vCounter = 0;
 
-    for( int vI = aBits.size() - 1; vI >= 0; --vI ){
+    for( int vI = vWurst.size() - 1; vI >= 0; --vI ){
 
         vHex <<= 1;
         ++vCounter;
 
-        if( aBits[vI] == '1' ){
+        if( vWurst[vI] == '1' ){
 
             vHex += 1;
 
@@ -54,6 +75,12 @@ std::string bitstringToHexstring( const std::string& aBits ){
 
     }
 
+    if( vCounter > 0 ){
+
+        vReverseHexas.push_back((char)(vHex^15 > 9 ? vHex^15 + 0x37 + 0x20 : vHex^15 + 0x30));
+
+    }
+
     while(!vReverseHexas.empty()){
 
         vHexas << vReverseHexas.back();
@@ -61,7 +88,9 @@ std::string bitstringToHexstring( const std::string& aBits ){
 
     }
 
-    return vHexas.str();
+    std::string vGrunz = vHexas.str();
+    std::reverse(vGrunz.begin(), vGrunz.end());
+    return vGrunz;
 
 }
 

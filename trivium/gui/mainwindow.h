@@ -5,6 +5,7 @@
 
 #include <QWidget>
 #include <QMainWindow>
+#include <QString>
 
 #include <bitset>
 
@@ -19,6 +20,10 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
 public:
     MainWindow(QWidget *parent = 0);
+
+public slots:
+    void updateHexText(const QString& aText);
+    void updateBinText(const QString& aText);
 
 };
 
