@@ -68,4 +68,26 @@ void Trivium::print(){
     std::cout << "C: " << mC << std::endl;
 }
 
+std::vector<unsigned char> bitsetToByteArray( const std::string& aBitSet ){
+
+    std::vector<unsigned char> vBytes;
+
+    int vPosition = aBitSet.length() - 1, vValue;
+
+    while( vPosition >= 0 ){
+
+        vValue = 0;
+        for( int vB = 0; vB < 8; ++vB ){
+            if( (vPosition - vB) < 0 ){
+                break;
+            }
+            vValue += (pow(2,vB) * (aBitSet[vPosition - vB] == '1'?1:0));
+        }
+        vBytes.push_back(vValue);
+        vPosition -= 8;
+    }
+
+    return vBytes;
+};
+
 }

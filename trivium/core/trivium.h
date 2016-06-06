@@ -2,6 +2,7 @@
 #define _trivium_
 
 #include <bitset>
+#include <vector>
 
 namespace trivium{
 
@@ -24,6 +25,8 @@ public:
 
 };
 
+std::vector<unsigned char> bitsetToByteArray( const std::string& aBitSet );
+
 }
 
-#endif
+#endif //_trivium_
