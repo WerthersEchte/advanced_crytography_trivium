@@ -26,7 +26,7 @@ public:
 };
 
 std::vector<unsigned char> bitsetToByteArray( const std::string& aBitSet );
-
+std::string hexstringToBitstring( const std::string& aHex );
 }
 
 #endif //_trivium_

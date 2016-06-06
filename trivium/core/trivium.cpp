@@ -1,6 +1,8 @@
 #include "trivium.h"
 
 #include <iostream>
+#include <sstream>
+#include <cmath>
 
 namespace trivium{
 
@@ -89,5 +91,73 @@ std::vector<unsigned char> bitsetToByteArray( const std::string& aBitSet ){
 
     return vBytes;
 };
+
+std::string hexstringToBitstring( const std::string& aHex ){
+
+    std::stringstream vBits;
+    std::locale vLocale;
+
+    for( char vCharacter : aHex ){
+
+        switch( std::tolower( vCharacter, vLocale ) ){
+
+            case '0':
+                vBits << "0000";
+                break;
+            case '1':
+                vBits << "0001";
+                break;
+            case '2':
+                vBits << "0010";
+                break;
+            case '3':
+                vBits << "0011";
+                break;
+            case '4':
+                vBits << "0100";
+                break;
+            case '5':
+                vBits << "0101";
+                break;
+            case '6':
+                vBits << "0110";
+                break;
+            case '7':
+                vBits << "0111";
+                break;
+            case '8':
+                vBits << "1000";
+                break;
+            case '9':
+                vBits << "1001";
+                break;
+            case 'a':
+                vBits << "1010";
+                break;
+            case 'b':
+                vBits << "1011";
+                break;
+            case 'c':
+                vBits << "1100";
+                break;
+            case 'd':
+                vBits << "1101";
+                break;
+            case 'e':
+                vBits << "1110";
+                break;
+            case 'f':
+                vBits << "1111";
+                break;
+            default:
+                break;
+
+        }
+
+    }
+
+    return vBits.str();
+
+}
 
 }

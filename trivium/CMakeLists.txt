@@ -20,17 +20,20 @@ set( SOURCE
    ${SOURCE}
    core/trivium.cpp
    gui/mainwindow.cpp
+   gui/bit.cpp
 )
 
 set( HEADERS
    ${HEADERS}
    core/trivium.h
    gui/mainwindow.h
+   gui/bit.h
 )
 
 set( UI_FILES
    ${UI_FILES}
    gui/ui/mainwindow.ui
+   gui/ui/bit.ui
 )
 
 QT5_WRAP_UI( UI_HEADERS
