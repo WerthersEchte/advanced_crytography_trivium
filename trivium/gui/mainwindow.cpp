@@ -76,12 +76,8 @@ MainWindow::MainWindow(QWidget *parent)
         vBit->setMinimumSize(14,40);
         mA.push_back(vBit);
 
-        if( vI == 68 ){
-            lABit69->setText(mTrivium.mA[vI]?"1":"0");
+        if( vI == 68 || vI == 65 || vI == 90 || vI == 91 || vI == 92 ){
             vBit->setStyleSheet("QWidget#lbBit { border-style: solid; border-width: 2; border-color: rgb(255, 0, 0); }");
-        }
-        if( vI == 65 ){
-            vBit->setStyleSheet("QWidget#lbBit { border-style: solid; border-width: 2; border-color: rgb(0, 255, 0); }");
         }
 
         fA->layout()->addWidget(vBit);
@@ -103,27 +99,40 @@ MainWindow::MainWindow(QWidget *parent)
         fC->layout()->addWidget(vBit);
     }
 
-    lCBit66_111_110_109->setText((mTrivium.mC[65] != mTrivium.mC[110]) != (mTrivium.mC[109]&&mTrivium.mC[108])?"1":"0");
-
-    QPixmap *pixmap = new QPixmap(1316,40);
+    QPixmap *pixmap = new QPixmap(1317,40);
     pixmap->fill(Qt::transparent);
-    QPainter p(pixmap);
-    p.setPen(QPen(QBrush(QColor(Qt::red)),3));
-    p.drawLine(973,40,973,25);
-    p.drawLine(0,25,973,25);
-    p.setPen(QPen(QBrush(QColor(Qt::green)),3));
-    p.drawLine(931,40,931,15);
-    p.drawLine(931,15,1330,15);
-    p.end();
     lAMTop->setPixmap(*pixmap);
-
     pixmap = new QPixmap(70,140);
     pixmap->fill(Qt::transparent);
-    p.begin(pixmap);
-    p.setPen(QPen(QBrush(QColor(Qt::red)),3));
-    p.drawLine(44,24,70,24);
-    p.drawLine(37,35,37,47);
-    p.setPen(QPen(QBrush(QColor(Qt::red)),1));
+    lAFront->setPixmap(*pixmap);
+    pixmap = new QPixmap(1317,60);
+    pixmap->fill(Qt::transparent);
+    lAMBottom->setPixmap(*pixmap);
+    pixmap = new QPixmap(70,140);
+    pixmap->fill(Qt::transparent);
+    lABack->setPixmap(*pixmap);
+
+    paintA();
+};
+
+void MainWindow::paintA(){
+
+    QPainter p(const_cast<QPixmap*>(lAMTop->pixmap()));
+    p.setPen(QPen(QBrush(mTrivium.mA[68]?Qt::green:Qt::red),3));
+    p.drawLine(973,40,973,25);
+    p.drawLine(0,25,973,25);
+    p.setPen(QPen(QBrush(mTrivium.mA[65]?Qt::green:Qt::red),3));
+    p.drawLine(931,40,931,15);
+    p.drawLine(931,15,1317,15);
+    p.end();
+    lAMTop->update();
+
+
+    p.begin(const_cast<QPixmap*>(lAFront->pixmap()));
+    p.setPen(QPen(QBrush(mTrivium.mA[68]?Qt::green:Qt::red),3));
+    p.drawLine(37,24,70,24);
+    p.drawLine(37,24,37,47);
+    p.setPen(QPen(QBrush(mTrivium.mA[68]?Qt::green:Qt::red),1));
     p.drawLine(34,40,38,50);
     p.drawLine(42,40,38,50);
     p.drawLine(35,40,38,50);
@@ -131,24 +140,118 @@ MainWindow::MainWindow(QWidget *parent)
     p.drawLine(36,40,38,50);
     p.drawLine(40,40,38,50);
 
-    p.setPen(QPen(QBrush(QColor(0,0,255)),3));
-    p.drawEllipse(28,51,21,21);
-    p.setPen(QPen(QBrush(QColor(0,0,255)),1));
-    p.drawLine(37,51,37,70);
-    p.drawLine(38,51,38,70);
-    p.drawLine(39,51,39,70);
-    p.drawLine(28,60,65,60);
-    p.drawLine(28,61,67,61);
-    p.drawLine(28,62,65,62);
+    paintXOR( 28,51, ((mTrivium.mC[65] != mTrivium.mC[110] != (mTrivium.mC[109]&&mTrivium.mC[108]) != mTrivium.mA[68])?Qt::green:Qt::red), &p );
 
+    p.setPen(QPen(QBrush(mTrivium.mC[65] != mTrivium.mC[110] != (mTrivium.mC[109]&&mTrivium.mC[108]) != mTrivium.mA[68]?Qt::green:Qt::red),1));
+    p.drawLine(49,60,65,60);
+    p.drawLine(49,61,67,61);
+    p.drawLine(49,62,65,62);
     p.drawLine(57,57,67,61);
     p.drawLine(57,58,67,61);
     p.drawLine(57,59,67,61);
     p.drawLine(57,63,67,61);
     p.drawLine(57,64,67,61);
     p.drawLine(57,65,67,61);
+
+    p.setPen(QPen(QBrush(mTrivium.mC[65] != mTrivium.mC[110] != (mTrivium.mC[109]&&mTrivium.mC[108])?Qt::green:Qt::red),3));
+    p.drawLine(5,61,5,140);
+    p.setPen(QPen(QBrush(mTrivium.mC[65] != mTrivium.mC[110] != (mTrivium.mC[109]&&mTrivium.mC[108])?Qt::green:Qt::red),1));
+    p.drawLine(5,60,27,60);
+    p.drawLine(5,61,28,61);
+    p.drawLine(5,62,27,62);
+    p.drawLine(17,57,27,61);
+    p.drawLine(17,58,27,61);
+    p.drawLine(17,59,27,61);
+    p.drawLine(17,63,27,61);
+    p.drawLine(17,64,27,61);
+    p.drawLine(17,65,27,61);
+
+    p.setPen(QPen(QBrush(mTrivium.mA[65] != mTrivium.mA[92] != (mTrivium.mA[90] && mTrivium.mA[91])?Qt::green:Qt::red),3));
+    p.drawLine(37,122,70,122);
+    p.drawLine(37,122,37,140);
+
     p.end();
-    lAFront->setPixmap(*pixmap);
+    lAFront->update();
+
+
+    p.begin(const_cast<QPixmap*>(lAMBottom->pixmap()));
+    p.setPen(QPen(QBrush(mTrivium.mA[90]?Qt::green:Qt::red),3));
+    p.drawLine(1281,0,1281,5);
+    p.setPen(QPen(QBrush(mTrivium.mA[91]?Qt::green:Qt::red),3));
+    p.drawLine(1295,0,1295,5);
+    paintAND( 1275,6, (mTrivium.mA[90] && mTrivium.mA[91]?Qt::green:Qt::red), &p );
+    p.drawLine(1288,24,1288,30);
+    paintXOR( 1278,31, (mTrivium.mA[65] != mTrivium.mA[92] != (mTrivium.mA[90] && mTrivium.mA[91])?Qt::green:Qt::red), &p );
+    p.setPen(QPen(QBrush(mTrivium.mA[65] != mTrivium.mA[92] != (mTrivium.mA[90] && mTrivium.mA[91])?Qt::green:Qt::red),3));
+    p.drawLine(0,41,1278,41);
+    p.setPen(QPen(QBrush(mTrivium.mA[65] != mTrivium.mA[92]?Qt::green:Qt::red),1));
+    p.drawLine(1316,40,1300,40);
+    p.drawLine(1316,41,1299,41);
+    p.drawLine(1316,42,1300,42);
+    p.drawLine(1309,37,1299,41);
+    p.drawLine(1309,38,1299,41);
+    p.drawLine(1309,39,1299,41);
+    p.drawLine(1309,43,1299,41);
+    p.drawLine(1309,44,1299,41);
+    p.drawLine(1309,45,1299,41);
+    p.end();
+    lAMBottom->update();
+
+    p.begin(const_cast<QPixmap*>(lABack->pixmap()));
+    p.setPen(QPen(QBrush(mTrivium.mA[65]?Qt::green:Qt::red),3));
+    p.drawLine(0,15,28,15);
+    p.drawLine(28,15,28,47);
+    p.setPen(QPen(QBrush(mTrivium.mA[65]?Qt::green:Qt::red),1));
+    p.drawLine(24,40,28,50);
+    p.drawLine(32,40,28,50);
+    p.drawLine(25,40,28,50);
+    p.drawLine(31,40,28,50);
+    p.drawLine(26,40,28,50);
+    p.drawLine(30,40,28,50);
+
+    p.setPen(QPen(QBrush(mTrivium.mA[92]?Qt::green:Qt::red),1));
+    p.drawLine(0,60,16,60);
+    p.drawLine(0,61,17,61);
+    p.drawLine(0,62,16,62);
+    p.drawLine(7,57,17,61);
+    p.drawLine(7,58,17,61);
+    p.drawLine(7,59,17,61);
+    p.drawLine(7,63,17,61);
+    p.drawLine(7,64,17,61);
+    p.drawLine(7,65,17,61);
+
+    paintXOR( 18,51, (mTrivium.mA[65] != mTrivium.mA[92]?Qt::green:Qt::red), &p );
+
+    p.setPen(QPen(QBrush(mTrivium.mA[65] != mTrivium.mA[92]?Qt::green:Qt::red),3));
+    p.drawLine(28,72,28,123);
+    p.drawLine(0,123,28,123);
+
+    p.drawLine(39,61,70,61);
+
+    p.end();
+    lABack->update();
+
+}
+
+void MainWindow::paintXOR( int aX, int aY, const QColor& aColor, QPainter* aPainter){
+
+    aPainter->setPen(QPen(QBrush(aColor),3));
+    aPainter->drawEllipse(aX,aY,21,21);
+    aPainter->setPen(QPen(QBrush(aColor),1));
+    aPainter->drawLine(aX+9,aY,aX+9,aY+19);
+    aPainter->drawLine(aX+10,aY,aX+10,aY+19);
+    aPainter->drawLine(aX+11,aY,aX+11,aY+19);
+    aPainter->drawLine(aX,aY+9,aX+19,aY+9);
+    aPainter->drawLine(aX,aY+10,aX+19,aY+10);
+    aPainter->drawLine(aX,aY+11,aX+19,aY+11);
+
+};
+void MainWindow::paintAND( int aX, int aY, const QColor& aColor, QPainter* aPainter){
+
+    aPainter->setPen(QPen(QBrush(aColor),3));
+    aPainter->eraseRect( aX,aY,26,18 );
+    aPainter->drawRect( aX,aY,26,18 );
+    aPainter->drawText( aX,aY,26,18, Qt::AlignHCenter | Qt::AlignVCenter ,QString("&") );
 
 };
 
@@ -239,8 +342,13 @@ void MainWindow::updateRegister(){
 
     for( int vI = 0; vI < mTrivium.mA.size(); ++vI ){
         mA[vI]->setBit(mTrivium.mA[vI]);
-        if( vI == 68 ){
-            lABit69->setText(mTrivium.mA[vI]?"1":"0");
+
+        if( vI == 65 || vI == 68 || vI == 90 || vI == 91 || vI == 92 ){
+            if(mTrivium.mA[vI]){
+                mA[vI]->setStyleSheet("QWidget#lbBit { border-style: solid; border-width: 2; border-color: rgb(0, 255, 0); }");
+            } else {
+                mA[vI]->setStyleSheet("QWidget#lbBit { border-style: solid; border-width: 2; border-color: rgb(255, 0, 0); }");
+            }
         }
     }
     for( int vI = 0; vI < mTrivium.mB.size(); ++vI ){
@@ -250,7 +358,7 @@ void MainWindow::updateRegister(){
         mC[vI]->setBit(mTrivium.mC[vI]);
     }
 
-    lCBit66_111_110_109->setText((mTrivium.mC[65] != mTrivium.mC[110]) != (mTrivium.mC[109]&&mTrivium.mC[108])?"1":"0");
+    paintA();
 
 };
 }

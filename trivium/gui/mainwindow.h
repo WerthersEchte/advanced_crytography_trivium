@@ -6,12 +6,15 @@
 #include <QWidget>
 #include <QMainWindow>
 #include <QString>
+#include <QColor>
 
 #include <bitset>
 #include <vector>
 
 #include "core/trivium.h"
 #include "gui/bit.h"
+
+class QPainter;
 
 namespace trivium{
 
@@ -40,6 +43,11 @@ public slots:
 
 private:
     void updateRegister();
+
+    void paintXOR( int aX, int aY, const QColor& aColor, QPainter* aPainter);
+    void paintAND( int aX, int aY, const QColor& aColor, QPainter* aPainter);
+
+    void paintA();
 
 };
 

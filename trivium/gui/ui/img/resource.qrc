@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="A">
+    <file>amtop.png</file>
+  </qresource>
+</RCC>
