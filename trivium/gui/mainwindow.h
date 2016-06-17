@@ -48,6 +48,9 @@ private:
     void paintAND( int aX, int aY, const QColor& aColor, QPainter* aPainter);
 
     void paintA();
+    void paintB();
+    void paintC();
+    void paintEnd();
 
 };
 
