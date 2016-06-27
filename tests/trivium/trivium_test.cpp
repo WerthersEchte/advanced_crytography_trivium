@@ -11,8 +11,12 @@
 #include <vector>
 #include <sstream>
 #include <locale>
-//TODO: Debug remove
-#include <iostream>
+
+/* !Attention!
+ * The bitstream coming out of Trivium is high endian, while the vector to compare
+ * them with is a bytestream, where the bytes are low endian. This means the tests need
+ * to convert the bitstream to this bytestream to be able to compare them
+ */
 
 BOOST_AUTO_TEST_CASE( hexstringToBitstring_first ) {
 
