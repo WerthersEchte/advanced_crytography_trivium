@@ -25,10 +25,12 @@ void Trivium::initalize(const std::bitset<80>& aKey, const std::bitset<80>& aIV)
 
     mC = std::bitset<111>("111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
+    mA.reset();
     for( int vI = 0; vI < aKey.size(); ++vI ){
         mA[vI] = aKey[vI];
     }
 
+    mB.reset();
     for( int vI = 0; vI < aIV.size(); ++vI ){
         mB[vI] = aIV[vI];
     }

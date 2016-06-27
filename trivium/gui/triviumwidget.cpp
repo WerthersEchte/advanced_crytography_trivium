@@ -77,6 +77,7 @@ TriviumWidget::TriviumWidget( trivium::Trivium* aTrivium, QWidget *parent )
 void TriviumWidget::paintEvent(QPaintEvent *mEvent){
 
     QPainter p(this);
+    p.setRenderHint(QPainter::Antialiasing, true);
     //A[69]
     p.setPen(QPen(QBrush(mTrivium->mA[68]?Qt::green:Qt::red),3));
     p.drawLine( (wAllFront->x() + wAllA->x() + wAMiddle->x() + wA->x()),(wAllFront->y() + wAllA->y() + wAMiddle->y() + wA->y() + wA->size().height()/2 - 37), (wAllFront->x() + wAllA->x() + wAMiddle->x() + wA->x() + fA->x() + mA[68]->x() + mA[68]->size().width()/2), (wAllFront->y() + wAllA->y() + wAMiddle->y() + wA->y() + wA->size().height()/2 - 37));
